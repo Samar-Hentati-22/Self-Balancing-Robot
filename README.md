@@ -38,7 +38,60 @@ f: vector of forces applied to the prismatic joints
 
 4-The simplification of the equations.
 
+### Steps to determine the system's equilibrium points 
+1- At equilibrium, all derivatives of the system’s state variables are equal to zero: 
+
+θ̇ = φ̇ = θ̈ = φ̈ = ψ̇ = 0
+
+2- Applying These Conditions:
+By applying these equilibrium conditions to the system’s nonlinear dynamic model, and assuming that the control inputs are zero:
+
+uᵣ = uₗ = 0
+
+3- After substituting these conditions, the linearized form of the model becomes:
+
+θ̇ = φ̇ = θ̈ = φ̈ = ψ̇ = 0
+
+A₄ sin(θ) = 0
+
+4-From the above equation, the system’s equilibrium points are obtained when:
+
+θ = 0° or θ = 180°
 
 
+Thus, the robot can be in two equilibrium configurations:
+- **Upright position** → θ = 0° (unstable equilibrium)  
+- **Inverted position** → θ = 180° (stable when lying down)
 
+### The use of PID 
+To stabilize the system around its upright equilibrium point (θ = 0°), a PID (Proportional–Integral–Derivative) controller is implemented.
+#### Objective 
+The main goal of the PID controller is to:
+- Maintain the pendulum in the upright position by minimizing the angular deviation θ.  
+- Control the wheel rotation ψ to ensure balance and position stability.
+#### Control Law 
+The control input applied to each motor is defined as:
 
+u(t) = Kp * e(t) + Ki * ∫e(t)dt + Kd * de(t)/dt
+
+where:  
+- e(t) = reference angle − measured angle (θ_ref − θ)  
+- Kp = proportional gain  
+- Ki = integral gain  
+- Kd = derivative gain  
+
+#### Controller Roles
+- **Proportional term (Kp):** Reacts to the current error, providing immediate correction.  
+- **Integral term (Ki):** Eliminates steady-state error over time.  
+- **Derivative term (Kd):** Predicts future error behavior to reduce overshoot and oscillations.  
+
+#### Implementation
+Each wheel motor is controlled independently, but both are coordinated to maintain:
+- Angular stability (θ), ensuring the pendulum remains upright.  
+- Position control (φ), keeping the robot balanced and centered.
+
+#### Tuning
+The PID parameters were tuned experimentally to achieve:
+- Fast response  
+- Minimal overshoot  
+- Stable steady-state behavior  
