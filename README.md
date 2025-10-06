@@ -3,7 +3,7 @@
 A self-balancing robot is a two-wheeled mobile robot that maintains its upright position using sensors and control algorithms, based on the principles of a wheeled inverted pendulum system.
 ## B. Challenge
 Unlike many other systems where stability is achieved by minimizing deviations from a stable equilibrium point, the two-wheeled inverted pendulum system requires maintaining an unstable equilibrium. This makes control even more delicate and demanding
-So , How did we determine the system's instability?
+So, how did we determine the system's instability?
 ## C. Theoretical Study 
 ### Mathematical Representation
 
@@ -94,4 +94,30 @@ Each wheel motor is controlled independently, but both are coordinated to mainta
 The PID parameters were tuned experimentally to achieve:
 - Fast response  
 - Minimal overshoot  
-- Stable steady-state behavior  
+- Stable steady-state behavior
+
+## D. Conception
+### Used Equipment
+- DC Gearbox TT Motor 200 Rpm 3 to 6VDC
+- Arduino Uno
+- MPU6050 Sensor which contains:
+  - An accelerometer sensor: measures acceleration on 3 axes (m/s²)
+  - A gyroscope sensor:measures agular velocity( rad/s) on 3 axes.
+- H Bridge L298N
+- Rechargeable batteries 3.7V
+- Tire Wheels DC
+### Code Implementation in Arduino 
+#### Programming steps: 
+1. Robot's Equilibrium Position
+2. Error Between the current and the balance position
+3. Porportional, Derivative and Integral Errors
+4. The sum of these errors is used as a command to the motors.
+The robot will rotate in a way that makes it approach balancing.
+### LabVIEW Presentation
+It’s a graphical programming environment developed by National Instruments. 
+It’s used primarily for data acquisition, instrument control, and industrial automation.
+Instead of writing code line-by-line, users create programs by connecting functional blocks in a flowchart-like interface called a block diagram.
+### Communication Process
+The connection between Arduino and LabView is made through the VISA API
+VIRTUAL INSTRUMENT SOFTWARE ARCHITECTURE
+
